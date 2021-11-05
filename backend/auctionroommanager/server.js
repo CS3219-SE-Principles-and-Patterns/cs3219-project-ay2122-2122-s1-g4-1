@@ -6,7 +6,7 @@ const server = require("http").createServer();
 const axios = require('axios');
 
 var redis_cluster_url = process.env.redis_cluster_url
-
+console.log(redis_cluster_url);
 //internal urls within kubernetes cluster
 // const roomstorageurl = "http://localhost:3000/api/room/"
 const roomstorageurl = 'http://auctionroom.default.svc.cluster.local:8083/api/room/'
