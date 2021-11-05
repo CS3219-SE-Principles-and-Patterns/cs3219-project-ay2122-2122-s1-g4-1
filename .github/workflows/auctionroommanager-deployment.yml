@@ -59,7 +59,7 @@ jobs:
           --tag "gcr.io/$PROJECT_ID/$IMAGE:1.0" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
-          --build-arg redis_cluster_url=primary.default.svc.cluster.local \
+          --build-arg redis_cluster_url=redis-leader.default.svc.cluster.local \
           ./backend/auctionroommanager
         docker push "gcr.io/$PROJECT_ID/$IMAGE:1.0"
     # Set up kustomize

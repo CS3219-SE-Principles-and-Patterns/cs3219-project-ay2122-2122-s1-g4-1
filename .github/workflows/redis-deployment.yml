@@ -54,5 +54,5 @@ jobs:
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |-
-        kubectl apply -f ./k8deployment/services/7-redis-cluster.yaml
+        kubectl apply -f ./k8deployment/services/7-redis.yaml
         kubectl get services -o wide
