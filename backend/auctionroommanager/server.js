@@ -5,6 +5,8 @@ const { RateLimiterRedis } = require('rate-limiter-flexible');
 const server = require("http").createServer();
 const axios = require('axios');
 
+var redis_cluster_url = process.env.redis_cluster_url
+
 //internal urls within kubernetes cluster
 // const roomstorageurl = "http://localhost:3000/api/room/"
 const roomstorageurl = 'http://auctionroom.default.svc.cluster.local:8083/api/room/'
@@ -30,9 +32,17 @@ const auctiondetailurl = 'http://auctiondetails.default.svc.cluster.local:8081/a
 
 
 //gke
+// const redisClient = new Redis(
+// 	{
+// 		host: "redis-cluster-redis-ha.default.svc.cluster.local",
+// 		port: 6379,
+// 		enableOfflineQueue: false,
+// 	});
+
+//get gke from env
 const redisClient = new Redis(
 	{
-		host: "redis-cluster-redis-ha.default.svc.cluster.local",
+		host: redis_cluster_url,
 		port: 6379,
 		enableOfflineQueue: false,
 	});
@@ -55,9 +65,19 @@ const io = require("socket.io")(server, {
 // 	});
 
 // kubernetes cluster
+// const pubClient = new Redis(
+// 	{
+// 		host: "redis-leader.default.svc.cluster.local",
+// 		port: 6379,
+// 		enableOfflineQueue: false,
+// 		lazyConnect: true
+// 	}
+// );
+
+//gke
 const pubClient = new Redis(
 	{
-		host: "redis-cluster-redis.default.svc.cluster.local",
+		host: redis_cluster_url,
 		port: 6379,
 		enableOfflineQueue: false,
 		lazyConnect: true

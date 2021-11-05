@@ -49,9 +49,16 @@ services:
   auctionbackend-auctionroommanager:
     build:  
       context: ./backend/auctionroommanager
+      args:
+       # need to embed variables during build
+       # can change this to change url when running frontend in docker-desktop container
+       # change to aggregator url or ingress url
+        - redis_cluster_url=redis-leader
     image: auctionbackend-auctionroommanager
     ports:
       - "9000:9000"
+    environment:
+      backend: mongodb://host.docker.internal:27017/useraccounts
 
   mongodb_container:
     image: mongo:latest
