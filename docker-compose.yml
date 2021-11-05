@@ -53,7 +53,8 @@ services:
        # need to embed variables during build
        # can change this to change url when running frontend in docker-desktop container
        # change to aggregator url or ingress url
-        - redis_cluster_url=redis-leader
+        - redis_cluster_url=primary.default.svc.cluster.local
+        - redis_follower_url=redis-follower.default.svc.cluster.local
     image: auctionbackend-auctionroommanager
     ports:
       - "9000:9000"

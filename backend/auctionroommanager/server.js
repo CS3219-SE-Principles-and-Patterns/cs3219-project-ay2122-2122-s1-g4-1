@@ -6,6 +6,7 @@ const server = require("http").createServer();
 const axios = require('axios');
 
 var redis_cluster_url = process.env.redis_cluster_url
+var redis_follower_url = process.env.redis_follower_url
 console.log(redis_cluster_url);
 //internal urls within kubernetes cluster
 // const roomstorageurl = "http://localhost:3000/api/room/"
@@ -46,6 +47,12 @@ const redisClient = new Redis(
 		port: 6379,
 		enableOfflineQueue: false,
 	});
+// const redisClient = new Redis(
+// 	{
+// 		host: redis_cluster_url,
+// 		port: 6379,
+// 		enableOfflineQueue: false,
+// 	});
 
 const io = require("socket.io")(server, {
 	cors: {
@@ -75,13 +82,27 @@ const io = require("socket.io")(server, {
 // );
 
 //gke
+// const pubClient = new Redis(
+// 	[
+// 		{
+// 			host: `${redis_cluster_url}`,
+// 			port: 6379,
+// 			enableOfflineQueue: false,
+// 			lazyConnect: true
+// 		}, {
+// 			host: `${redis_follower_url}`,
+// 			port: 6379,
+// 			enableOfflineQueue: false,
+// 			lazyConnect: true
+// 		}]
+// );
 const pubClient = new Redis(
-	{
-		host: redis_cluster_url,
-		port: 6379,
-		enableOfflineQueue: false,
-		lazyConnect: true
-	}
+		{
+			host: redis_cluster_url,
+			port: 6379,
+			enableOfflineQueue: false,
+			lazyConnect: true
+		}
 );
 
 const subClient = pubClient.duplicate();

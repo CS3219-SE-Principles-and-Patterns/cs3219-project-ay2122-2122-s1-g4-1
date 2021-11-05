@@ -4,7 +4,8 @@
 # kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.0.4/deploy/static/provider/cloud/deploy.yaml;
 kubectl apply -f ./k8/services/2-mongodb.yaml; 
 # redis server needs to start before auctionroom
-kubectl apply -f ./k8/services/7-redis.yaml ;
+# kubectl apply -f ./k8/services/7-redis.yaml ;
+kubectl apply -f ./k8/services/7-redis-cluster.yaml ;
 kubectl apply -f ./k8/services/3-useraccount.yaml; 
 kubectl apply -f ./k8/services/5-auctiondetails.yaml;
 kubectl apply -f ./k8/ingress/unauth-ingress.yaml ;
