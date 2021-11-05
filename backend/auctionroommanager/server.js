@@ -57,7 +57,7 @@ const io = require("socket.io")(server, {
 // kubernetes cluster
 const pubClient = new Redis(
 	{
-		host: "redis-leader.default.svc.cluster.local",
+		host: "redis-cluster-redis.default.svc.cluster.local",
 		port: 6379,
 		enableOfflineQueue: false,
 		lazyConnect: true
