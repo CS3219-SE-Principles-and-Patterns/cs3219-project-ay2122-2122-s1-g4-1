@@ -44,12 +44,12 @@ function getCurrentUser() {
 
 export default function LoginPage() {
   const authContext = useContext(AuthContext);
-  const dockerauthserver = process.env.REACT_APP_dockerauthserver;
+  const dockerauthserver = `https://${process.env.REACT_APP_dockerauthserver||'localhost/api/user/login'}`;
   let history = useHistory();
   async function login(values) {
-    await axios.post(`https://${dockerauthserver||'localhost/api/user/login'}`, values)
+    await axios.post(dockerauthserver, values)
       .then(response => {
-        // console.log(response);
+        console.log(dockerauthserver);
         // alert('Login Success!');
         if (response.data['jwtToken']) {
           localStorage.setItem("user", JSON.stringify(response.data['jwtToken']));
