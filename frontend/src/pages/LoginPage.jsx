@@ -44,7 +44,7 @@ function getCurrentUser() {
 
 export default function LoginPage() {
   const authContext = useContext(AuthContext);
-  const dockerauthserver = `https://${process.env.REACT_APP_dockerauthserver||'localhost/api/user/login'}`;
+  const dockerauthserver = `https://${process.env.REACT_APP_dockerauthserver||'localhost/api/user/'}login`;
   let history = useHistory();
   async function login(values) {
     await axios.post(dockerauthserver, values)

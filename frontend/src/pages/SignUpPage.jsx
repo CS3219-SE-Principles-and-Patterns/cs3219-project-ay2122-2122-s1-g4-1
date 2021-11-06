@@ -78,7 +78,7 @@ export default function SignUp() {
         validate,
         onSubmit: values => {
             // alert(JSON.stringify(values, null, 2));
-            axios.post(`https://${process.env.REACT_APP_dockerauthserver||'localhost'}/api/user/register`, values)
+            axios.post(`https://${process.env.REACT_APP_dockerauthserver||'localhost/api/user/'}register`, values)
               .then(function (response) {
                 console.log(response);
                 history.push("/login");
