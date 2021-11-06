@@ -17,6 +17,7 @@ spec:
     spec:
       containers:
           - image: gcr.io/graphical-mile-329010/auctionbackend-auctionroommanager:1.0
+            imagePullPolicy: Always
             name: auctionbackend-auctionroommanager
             ports:
             - containerPort: 9000
