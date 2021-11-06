@@ -13,9 +13,16 @@ metadata:
     nginx.ingress.kubernetes.io/cors-allow-methods: "PUT, GET, POST, OPTIONS"
     nginx.ingress.kubernetes.io/cors-allow-origin: "*"
     nginx.ingress.kubernetes.io/cors-allow-credentials: "true"
+    # sticky session to enable chatroom scaling
+    nginx.ingress.kubernetes.io/affinity: "cookie"
+    nginx.ingress.kubernetes.io/affinity-mode: "balanced"
+    nginx.ingress.kubernetes.io/session-cookie-name: "route"
+    nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
+    nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
+    # allow websockets
+    nginx.org/websocket-services: "auctionroommanager"
 spec:
   rules:
-    # - host: kubernetes.docker.internal
     - http:
         paths:
           - path: /api/auctiondetails
@@ -53,3 +60,17 @@ spec:
                   name: aggregatesvr
                   port:
                     number: 8085
+          - path: /auctionroom
+            pathType: Prefix
+            backend:
+                service:
+                  name: auctionroommanager
+                  port:
+                    number: 9000
+          - path: /socket.io
+            pathType: Prefix
+            backend:
+                service:
+                  name: auctionroommanager
+                  port:
+                    number: 9000

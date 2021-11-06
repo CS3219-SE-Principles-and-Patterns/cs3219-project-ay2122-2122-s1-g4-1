@@ -15,12 +15,15 @@ const useChat = (roomId) => {
     const [highestBid, setHighestBid] = useState({});
     const [status, setStatus] = useState(true);
     const socketRef = useRef();
-    
+
     useEffect(() => {
         socketRef.current = socketIOClient(SOCKET_SERVER_URL, {
+            extraHeaders: {
+                Authorization: JSON.parse(localStorage.getItem('user'))
+            },
             transport: ['websocket'],
-            query: { roomid : roomId, token: JSON.parse(localStorage.getItem('user')) }
-
+            query: { roomid: roomId, token: JSON.parse(localStorage.getItem('user')) }
+        
         });
 
         //new message
@@ -44,7 +47,7 @@ const useChat = (roomId) => {
         // });
         socketRef.current.on(NEW_BID_EVENT, (bid) => {
             console.log(bid);
-            setHighestBid({highest : bid.bid, username : bid.username});
+            setHighestBid({ highest: bid.bid, username: bid.username });
         });
 
         //room ended by auction owner

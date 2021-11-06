@@ -17,9 +17,9 @@ services:
     ports:
       - "80:3000"
     
-  #   # environment:
-  #     # react env variables need to start with REACT_APP_
-  #     # REACT_APP_dockerauthserver: host.docker.internal:8000
+    # environment:
+    #   react env variables need to start with REACT_APP_
+    #   REACT_APP_dockerauthserver: host.docker.internal:8000
     
   auctionbackend-useraccount:
     build:  
