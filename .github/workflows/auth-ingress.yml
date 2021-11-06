@@ -61,5 +61,5 @@ jobs:
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |-
-        kubectl apply -f ./k8/ingress/auth-ingress.yaml
+        kubectl apply -f ./k8deployment/ingress/auth-ingress.yaml
         kubectl get services -o wide

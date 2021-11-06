@@ -46,13 +46,6 @@ spec:
                   name: auctionroom
                   port:
                     number: 8083
-          - path: /test-auth
-            pathType: Prefix
-            backend:
-                service:
-                  name: frontend
-                  port:
-                    number: 3000
           - path: /api/test-agg
             pathType: Prefix
             backend:
